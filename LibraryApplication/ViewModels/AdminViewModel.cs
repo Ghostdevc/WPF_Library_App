@@ -37,5 +37,7 @@ namespace LibraryApplication.ViewModels
         public ICommand NavigateContentInterfaceCommand { get; }
 
         public ICommand LogoutCommand { get; }
+
+        //test change
     }
 }
