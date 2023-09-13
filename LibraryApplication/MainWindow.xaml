@@ -1,0 +1,109 @@
+﻿<Window x:Class="LibraryApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" xmlns:views="clr-namespace:LibraryApplication.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <!--xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ManagePenaltyViewModel}"-->
+    <!--<Grid>
+        
+        --><!--<vw:ManagePenaltyView DataContext="{Binding ManageReservationViewModel}" ReservationDp="{Binding CurrentRecord, Mode=TwoWay}"></vw:ManagePenaltyView>--><!--
+
+        <vw:ManagePenaltyView PenaltyDp="{Binding CurrentListRecord}" PenaltyTxtDp="{Binding CurrentRecord, Mode=TwoWay}" ReservationDp="{Binding ReservationCurrentListRecord}" ReservationTxtDp="{Binding CurrentReservationToBePunished}"></vw:ManagePenaltyView>
+        
+        --><!--<vw:CategoryControlView CategoryDp="{Binding CurrentListRecord}" CategoryTxtDp="{Binding CurrentRecord}"></vw:CategoryControlView>-->
+
+        <!--<vw:WriterControlView WriterDp="{Binding CurrentListRecord}" WriterTxtDp="{Binding CurrentRecord}"></vw:WriterControlView>-->
+
+        <!--<vw:BooksView BookDp="{Binding CurrentListRecord}" BookTxtDp="{Binding CurrentBook}"></vw:BooksView>-->
+
+        <!--<vw:ManageReservationsView></vw:ManageReservationsView>-->
+
+        <!--<vw:ManagePenaltyPoliciesView PolicyTxtDp="{Binding CurrentPolicy}" PolicyDp="{Binding CurrentListRecord}"></vw:ManagePenaltyPoliciesView>-->
+
+
+        <!--<vw:ClientControlView UserTxtDp="{Binding CurrentUser}" UserDp="{Binding CurrentListRecord}"></vw:ClientControlView>--><!--
+        
+        
+
+    </Grid>-->
+
+    <ContentControl Content="{Binding CurrentViewModel}">
+
+        <ContentControl.Resources>
+
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+
+                <views:LoginView></views:LoginView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:AdminViewModel}">
+
+                <views:AdminView></views:AdminView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ManageReservationViewModel}">
+
+                <views:ManageReservationsView></views:ManageReservationsView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PenaltyInterfaceViewModel}">
+
+                <views:PenaltyInterfaceView></views:PenaltyInterfaceView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ManagePenaltyViewModel}">
+
+                <views:ManagePenaltyView PenaltyDp="{Binding CurrentListRecord}" PenaltyTxtDp="{Binding CurrentRecord, Mode=TwoWay}" ReservationDp="{Binding ReservationCurrentListRecord}" ReservationTxtDp="{Binding CurrentReservationToBePunished}"></views:ManagePenaltyView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PenaltyPoliciesViewModel}">
+
+                <views:ManagePenaltyPoliciesView PolicyTxtDp="{Binding CurrentPolicy}" PolicyDp="{Binding CurrentListRecord}"></views:ManagePenaltyPoliciesView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:UsersViewModel}">
+
+                <views:ClientControlView UserTxtDp="{Binding CurrentUser}" UserDp="{Binding CurrentListRecord}"></views:ClientControlView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ContentInterfaceViewModel}">
+
+                <views:ContentInterfaceView></views:ContentInterfaceView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:CategoriesViewModel}">
+
+                <views:CategoryControlView CategoryDp="{Binding CurrentListRecord}" CategoryTxtDp="{Binding CurrentRecord}"></views:CategoryControlView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:WritersViewModel}">
+
+                <views:WriterControlView WriterDp="{Binding CurrentListRecord}" WriterTxtDp="{Binding CurrentRecord}"></views:WriterControlView>
+
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:BooksViewModel}">
+
+                <views:BooksView BookDp="{Binding CurrentListRecord}" BookTxtDp="{Binding CurrentBook}"></views:BooksView>
+
+            </DataTemplate>
+
+
+        </ContentControl.Resources>
+        
+    </ContentControl>
+    
+</Window>

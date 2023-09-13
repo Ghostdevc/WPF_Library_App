@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="LibraryApplication.Views.BooksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryApplication.Views" xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BooksViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5">
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Books Management" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+
+        <TextBlock Text="Book Id"
+                   Grid.Row="1"
+                   Grid.Column="0"/>
+
+        <TextBlock Text="Book Name"
+                   Grid.Row="2"
+                   Grid.Column="0"/>
+
+        <TextBlock Text="Status"
+                   Grid.Row="3"
+                   Grid.Column="0"/>
+
+        <TextBlock Text="Writer"
+                   Grid.Row="4"
+                   Grid.Column="0"/>
+
+        <TextBlock Text="Category"
+                   Grid.Row="5"
+                   Grid.Column="0"/>
+
+        <TextBox Name="txtBookId"
+                   Grid.Row="1"
+                   Grid.Column="1" Text="{Binding Path=CurrentBook.Book_id , Mode=TwoWay}" TextChanged="txtBookId_TextChanged"/>
+
+        <TextBox Name="txtBookName"
+                   Grid.Row="2"
+                   Grid.Column="1" Text="{Binding Path=CurrentBook.Book_name , Mode=TwoWay}" TextChanged="txtBookName_TextChanged"/>
+
+        <TextBox Name="txtStatus"
+                   Grid.Row="3"
+                   Grid.Column="1" Text="{Binding Path=CurrentBook.Status_id , Mode=TwoWay}" TextChanged="txtStatus_TextChanged"/>
+
+        <TextBox Name="txtWriter"
+                   Grid.Row="4"
+                   Grid.Column="1" Text="{Binding Path=CurrentBook.Writer_id , Mode=TwoWay}" TextChanged="txtWriter_TextChanged"/>
+
+        <TextBox Name="txtCategory"
+                   Grid.Row="5"
+                   Grid.Column="1" Text="{Binding Path=CurrentBook.Category_id , Mode=TwoWay}" TextChanged="txtCategory_TextChanged"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="1">
+
+            <Button Name="btnAdd" Content="ADD" Command="{Binding Path=SaveBookCommand}"></Button>
+
+            <Button Name="btnSearch" Content="SEARCH" Command="{Binding Path=SearchBookCommand}"></Button>
+
+            <Button Name="btnUpdate" Content="UPDATE" Command="{Binding Path=UpdateBookCommand}"></Button>
+
+            <Button Name="btnDelete" Content="DELETE" Command="{Binding Path=DeleteBookCommand}"></Button>
+
+            <Button Name="btnLoadBooks" Content="LIST BOOKS" Command="{Binding Path=LoadAllBooksCommand}"></Button>
+
+            <Button Name="btnLoadAvailableBooks" Content="LIST AVAILABLE BOOKS" Command="{Binding Path=LoadAvailableBooksCommand}"></Button>
+
+            <Button Name="btnNavigateContentInterface" Content=">>NAVIGATE CONTENT INTERFACE" Command="{Binding NavigateContentInterfaceCommand}" Margin="15 0 0 0"></Button>
+
+            <Button Name="btnNavigateMain" Content=">>>NAVIGATE ADMIN PAGE" Command="{Binding NavigateMainCommand}" Margin="0 0 0 0"></Button>
+
+        </StackPanel>
+
+        <TextBlock Name="txtBlockMessage" Grid.Row="8" Grid.Column="1" Text="{Binding Path=Message}"></TextBlock>
+
+
+        <ListView Name="lvBooks" Grid.Row="9" Grid.Column="1" ItemsSource="{Binding Path=BooksList , Mode=TwoWay}"  SelectionMode="Single" SelectionChanged="lvBooks_SelectionChanged" >
+
+            <ListView.View>
+
+                <GridView>
+
+                    <GridViewColumn Header="Book ID" DisplayMemberBinding="{Binding Book_id}"></GridViewColumn>
+
+                    <GridViewColumn Header="Book Name" DisplayMemberBinding="{Binding Book_name}"></GridViewColumn>
+
+                    <GridViewColumn Header="Status ID" DisplayMemberBinding="{Binding Status_id}"></GridViewColumn>
+
+                    <GridViewColumn Header="Writer ID" DisplayMemberBinding="{Binding Writer_id}"></GridViewColumn>
+
+                    <GridViewColumn Header="Category ID" DisplayMemberBinding="{Binding Category_id}"></GridViewColumn>
+
+
+                </GridView>
+
+            </ListView.View>
+
+        </ListView>
+
+
+        <!--<DataGrid Name="dgBooksControl" AutoGenerateColumns="False" Grid.Row="9" Grid.Column="1" ItemsSource="{Binding Path=BooksList , Mode=TwoWay}">
+            
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Book ID" Width="auto" Binding="{Binding Path=Book_id}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Book Name" Width="auto" Binding="{Binding Path=Book_name}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Book Status" Width="auto" Binding="{Binding Path=Status_id}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Writer" Width="auto" Binding="{Binding Path=Writer_id}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Category" Width="auto" Binding="{Binding Path=Category_id}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>-->
+
+    </Grid>
+</UserControl>

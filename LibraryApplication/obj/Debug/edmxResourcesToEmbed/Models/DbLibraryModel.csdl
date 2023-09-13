@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tbl_Book">
+    <Key>
+      <PropertyRef Name="Id_Book" />
+    </Key>
+    <Property Name="Id_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FK_Status_Id" Type="Int32" />
+    <Property Name="FK_Writer_Id" Type="Int32" />
+    <Property Name="FK_Category_Id" Type="Int32" />
+    <NavigationProperty Name="Tbl_Category" Relationship="Self.FK_Tbl_Book_Tbl_Category" FromRole="Tbl_Book" ToRole="Tbl_Category" />
+    <NavigationProperty Name="Tbl_Status" Relationship="Self.FK_Tbl_Book_Tbl_Status" FromRole="Tbl_Book" ToRole="Tbl_Status" />
+    <NavigationProperty Name="Tbl_Writer" Relationship="Self.FK_Tbl_Book_Tbl_Writer" FromRole="Tbl_Book" ToRole="Tbl_Writer" />
+    <NavigationProperty Name="Tbl_Reservation" Relationship="Self.FK_Tbl_Reservation_Tbl_Book" FromRole="Tbl_Book" ToRole="Tbl_Reservation" />
+  </EntityType>
+  <EntityType Name="Tbl_Category">
+    <Key>
+      <PropertyRef Name="Id_Category" />
+    </Key>
+    <Property Name="Id_Category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Book" Relationship="Self.FK_Tbl_Book_Tbl_Category" FromRole="Tbl_Category" ToRole="Tbl_Book" />
+  </EntityType>
+  <EntityType Name="Tbl_PenalPolicy">
+    <Key>
+      <PropertyRef Name="Id_PenalPolicy" />
+    </Key>
+    <Property Name="Id_PenalPolicy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Penalty_Days" Type="Int32" />
+    <NavigationProperty Name="Tbl_Penalty" Relationship="Self.FK_Tbl_Penalty_Tbl_PenalPolicy" FromRole="Tbl_PenalPolicy" ToRole="Tbl_Penalty" />
+  </EntityType>
+  <EntityType Name="Tbl_Penalty">
+    <Key>
+      <PropertyRef Name="Id_Penalty" />
+    </Key>
+    <Property Name="Id_Penalty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_UserID" Type="Int32" />
+    <Property Name="FK_PenalPolicyID" Type="Int32" />
+    <Property Name="Penalty_Expires_On" Type="DateTime" Precision="0" />
+    <Property Name="FK_Punished_Reservation_id" Type="Int32" />
+    <NavigationProperty Name="Tbl_PenalPolicy" Relationship="Self.FK_Tbl_Penalty_Tbl_PenalPolicy" FromRole="Tbl_Penalty" ToRole="Tbl_PenalPolicy" />
+    <NavigationProperty Name="Tbl_Reservation" Relationship="Self.FK_Tbl_Penalty_Tbl_Reservation" FromRole="Tbl_Penalty" ToRole="Tbl_Reservation" />
+    <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Penalty_Tbl_User" FromRole="Tbl_Penalty" ToRole="Tbl_User" />
+  </EntityType>
+  <EntityType Name="Tbl_Reservation">
+    <Key>
+      <PropertyRef Name="Id_Reservation" />
+    </Key>
+    <Property Name="Id_Reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookID" Type="Int32" />
+    <Property Name="FK_Booked_to_UserID" Type="Int32" />
+    <Property Name="Booking_Date" Type="DateTime" Precision="0" />
+    <Property Name="ExpectedToReturn_Date" Type="DateTime" Precision="0" />
+    <Property Name="FK_Reservation_Status_ID" Type="Int32" />
+    <Property Name="Return_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Tbl_Book" Relationship="Self.FK_Tbl_Reservation_Tbl_Book" FromRole="Tbl_Reservation" ToRole="Tbl_Book" />
+    <NavigationProperty Name="Tbl_Penalty" Relationship="Self.FK_Tbl_Penalty_Tbl_Reservation" FromRole="Tbl_Reservation" ToRole="Tbl_Penalty" />
+    <NavigationProperty Name="Tbl_Reservation_Status" Relationship="Self.FK_Tbl_Reservation_Tbl_Reservation_Status" FromRole="Tbl_Reservation" ToRole="Tbl_Reservation_Status" />
+    <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Reservation_Tbl_User" FromRole="Tbl_Reservation" ToRole="Tbl_User" />
+  </EntityType>
+  <EntityType Name="Tbl_Reservation_Status">
+    <Key>
+      <PropertyRef Name="Id_Reservation_Status" />
+    </Key>
+    <Property Name="Id_Reservation_Status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reservation_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Reservation" Relationship="Self.FK_Tbl_Reservation_Tbl_Reservation_Status" FromRole="Tbl_Reservation_Status" ToRole="Tbl_Reservation" />
+  </EntityType>
+  <EntityType Name="Tbl_Status">
+    <Key>
+      <PropertyRef Name="Id_Status" />
+    </Key>
+    <Property Name="Id_Status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Book" Relationship="Self.FK_Tbl_Book_Tbl_Status" FromRole="Tbl_Status" ToRole="Tbl_Book" />
+  </EntityType>
+  <EntityType Name="Tbl_User">
+    <Key>
+      <PropertyRef Name="Id_User" />
+    </Key>
+    <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_UserTypeID" Type="Int32" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_Password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="User_UserNick" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Penalty" Relationship="Self.FK_Tbl_Penalty_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Penalty" />
+    <NavigationProperty Name="Tbl_Reservation" Relationship="Self.FK_Tbl_Reservation_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Reservation" />
+    <NavigationProperty Name="Tbl_UserType" Relationship="Self.FK_Tbl_User_Tbl_UserType" FromRole="Tbl_User" ToRole="Tbl_UserType" />
+  </EntityType>
+  <EntityType Name="Tbl_UserType">
+    <Key>
+      <PropertyRef Name="Id_UserType" />
+    </Key>
+    <Property Name="Id_UserType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_User_Tbl_UserType" FromRole="Tbl_UserType" ToRole="Tbl_User" />
+  </EntityType>
+  <EntityType Name="Tbl_Writer">
+    <Key>
+      <PropertyRef Name="Id_Writer" />
+    </Key>
+    <Property Name="Id_Writer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Writer_Name_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Book" Relationship="Self.FK_Tbl_Book_Tbl_Writer" FromRole="Tbl_Writer" ToRole="Tbl_Book" />
+  </EntityType>
+  <Association Name="FK_Tbl_Book_Tbl_Category">
+    <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
+    <End Role="Tbl_Book" Type="Self.Tbl_Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Category">
+        <PropertyRef Name="Id_Category" />
+      </Principal>
+      <Dependent Role="Tbl_Book">
+        <PropertyRef Name="FK_Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Book_Tbl_Status">
+    <End Role="Tbl_Status" Type="Self.Tbl_Status" Multiplicity="0..1" />
+    <End Role="Tbl_Book" Type="Self.Tbl_Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Status">
+        <PropertyRef Name="Id_Status" />
+      </Principal>
+      <Dependent Role="Tbl_Book">
+        <PropertyRef Name="FK_Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Book_Tbl_Writer">
+    <End Role="Tbl_Writer" Type="Self.Tbl_Writer" Multiplicity="0..1" />
+    <End Role="Tbl_Book" Type="Self.Tbl_Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Writer">
+        <PropertyRef Name="Id_Writer" />
+      </Principal>
+      <Dependent Role="Tbl_Book">
+        <PropertyRef Name="FK_Writer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Reservation_Tbl_Book">
+    <End Role="Tbl_Book" Type="Self.Tbl_Book" Multiplicity="0..1" />
+    <End Role="Tbl_Reservation" Type="Self.Tbl_Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Book">
+        <PropertyRef Name="Id_Book" />
+      </Principal>
+      <Dependent Role="Tbl_Reservation">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Penalty_Tbl_PenalPolicy">
+    <End Role="Tbl_PenalPolicy" Type="Self.Tbl_PenalPolicy" Multiplicity="0..1" />
+    <End Role="Tbl_Penalty" Type="Self.Tbl_Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_PenalPolicy">
+        <PropertyRef Name="Id_PenalPolicy" />
+      </Principal>
+      <Dependent Role="Tbl_Penalty">
+        <PropertyRef Name="FK_PenalPolicyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Penalty_Tbl_Reservation">
+    <End Role="Tbl_Reservation" Type="Self.Tbl_Reservation" Multiplicity="0..1" />
+    <End Role="Tbl_Penalty" Type="Self.Tbl_Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Reservation">
+        <PropertyRef Name="Id_Reservation" />
+      </Principal>
+      <Dependent Role="Tbl_Penalty">
+        <PropertyRef Name="FK_Punished_Reservation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Penalty_Tbl_User">
+    <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="0..1" />
+    <End Role="Tbl_Penalty" Type="Self.Tbl_Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_User">
+        <PropertyRef Name="Id_User" />
+      </Principal>
+      <Dependent Role="Tbl_Penalty">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Reservation_Tbl_Reservation_Status">
+    <End Role="Tbl_Reservation_Status" Type="Self.Tbl_Reservation_Status" Multiplicity="0..1" />
+    <End Role="Tbl_Reservation" Type="Self.Tbl_Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Reservation_Status">
+        <PropertyRef Name="Id_Reservation_Status" />
+      </Principal>
+      <Dependent Role="Tbl_Reservation">
+        <PropertyRef Name="FK_Reservation_Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Reservation_Tbl_User">
+    <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="0..1" />
+    <End Role="Tbl_Reservation" Type="Self.Tbl_Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_User">
+        <PropertyRef Name="Id_User" />
+      </Principal>
+      <Dependent Role="Tbl_Reservation">
+        <PropertyRef Name="FK_Booked_to_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_User_Tbl_UserType">
+    <End Role="Tbl_UserType" Type="Self.Tbl_UserType" Multiplicity="0..1" />
+    <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_UserType">
+        <PropertyRef Name="Id_UserType" />
+      </Principal>
+      <Dependent Role="Tbl_User">
+        <PropertyRef Name="FK_UserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbLibraryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Tbl_Book" EntityType="Self.Tbl_Book" />
+    <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
+    <EntitySet Name="Tbl_PenalPolicy" EntityType="Self.Tbl_PenalPolicy" />
+    <EntitySet Name="Tbl_Penalty" EntityType="Self.Tbl_Penalty" />
+    <EntitySet Name="Tbl_Reservation" EntityType="Self.Tbl_Reservation" />
+    <EntitySet Name="Tbl_Reservation_Status" EntityType="Self.Tbl_Reservation_Status" />
+    <EntitySet Name="Tbl_Status" EntityType="Self.Tbl_Status" />
+    <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
+    <EntitySet Name="Tbl_UserType" EntityType="Self.Tbl_UserType" />
+    <EntitySet Name="Tbl_Writer" EntityType="Self.Tbl_Writer" />
+    <AssociationSet Name="FK_Tbl_Book_Tbl_Category" Association="Self.FK_Tbl_Book_Tbl_Category">
+      <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+      <End Role="Tbl_Book" EntitySet="Tbl_Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Book_Tbl_Status" Association="Self.FK_Tbl_Book_Tbl_Status">
+      <End Role="Tbl_Status" EntitySet="Tbl_Status" />
+      <End Role="Tbl_Book" EntitySet="Tbl_Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Book_Tbl_Writer" Association="Self.FK_Tbl_Book_Tbl_Writer">
+      <End Role="Tbl_Writer" EntitySet="Tbl_Writer" />
+      <End Role="Tbl_Book" EntitySet="Tbl_Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Reservation_Tbl_Book" Association="Self.FK_Tbl_Reservation_Tbl_Book">
+      <End Role="Tbl_Book" EntitySet="Tbl_Book" />
+      <End Role="Tbl_Reservation" EntitySet="Tbl_Reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Penalty_Tbl_PenalPolicy" Association="Self.FK_Tbl_Penalty_Tbl_PenalPolicy">
+      <End Role="Tbl_PenalPolicy" EntitySet="Tbl_PenalPolicy" />
+      <End Role="Tbl_Penalty" EntitySet="Tbl_Penalty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Penalty_Tbl_Reservation" Association="Self.FK_Tbl_Penalty_Tbl_Reservation">
+      <End Role="Tbl_Reservation" EntitySet="Tbl_Reservation" />
+      <End Role="Tbl_Penalty" EntitySet="Tbl_Penalty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Penalty_Tbl_User" Association="Self.FK_Tbl_Penalty_Tbl_User">
+      <End Role="Tbl_User" EntitySet="Tbl_User" />
+      <End Role="Tbl_Penalty" EntitySet="Tbl_Penalty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Reservation_Tbl_Reservation_Status" Association="Self.FK_Tbl_Reservation_Tbl_Reservation_Status">
+      <End Role="Tbl_Reservation_Status" EntitySet="Tbl_Reservation_Status" />
+      <End Role="Tbl_Reservation" EntitySet="Tbl_Reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Reservation_Tbl_User" Association="Self.FK_Tbl_Reservation_Tbl_User">
+      <End Role="Tbl_User" EntitySet="Tbl_User" />
+      <End Role="Tbl_Reservation" EntitySet="Tbl_Reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_User_Tbl_UserType" Association="Self.FK_Tbl_User_Tbl_UserType">
+      <End Role="Tbl_UserType" EntitySet="Tbl_UserType" />
+      <End Role="Tbl_User" EntitySet="Tbl_User" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DbLibraryModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DbLibraryModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="LibraryApplication.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryApplication.Views" xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" xmlns:components="clr-namespace:LibraryApplication.Components" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <TextBlock Text="LIBRARY MANAGEMENT SYSTEM" HorizontalAlignment="Center" FontWeight="Bold" Margin="10"></TextBlock>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="30">
+
+                <TextBlock Text="Username : " HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBox Name="txtUserName" Text="{Binding Username}" Width="100"></TextBox>
+
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+
+                <TextBlock Text="Password : " HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <components:BindablePasswordBox Password="{Binding Password , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Width="100"></components:BindablePasswordBox>
+
+            </StackPanel>
+
+            <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+
+            <Button Name="btnLogin" Content="Login" HorizontalAlignment="Center" Width="100" Margin="10" Command="{Binding LoginCommand}"></Button>
+
+
+        </StackPanel>
+
+    </Grid>
+    
+    
+</UserControl>

@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="LibraryApplication.Views.WriterControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryApplication.Views" xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:WritersViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5">
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Writer Management" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+
+        <TextBlock Text="Writer Id"
+                   Grid.Row="1"
+                   Grid.Column="0"/>
+
+        <TextBlock Text="Writer Name Surname"
+                   Grid.Row="2"
+                   Grid.Column="0"/>
+
+
+        <TextBox Name="txtWriterId"
+                   Grid.Row="1"
+                   Grid.Column="1" Text="{Binding Path=CurrentRecord.Writer_id , Mode=TwoWay}" TextChanged="txtWriterId_TextChanged"/>
+
+        <TextBox Name="txtWriterNameSurname"
+                   Grid.Row="2"
+                   Grid.Column="1" Text="{Binding Path=CurrentRecord.Writer_name_surname , Mode=TwoWay}" TextChanged="txtWriterNameSurname_TextChanged"/>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+
+            <Button Name="btnAdd" Content="ADD" Command="{Binding Path=SaveWriterCommand}"></Button>
+
+            <Button Name="btnSearch" Content="SEARCH" Command="{Binding Path=SearchWriterCommand}"></Button>
+
+            <Button Name="btnUpdate" Content="UPDATE" Command="{Binding Path=UpdateWriterCommand}"></Button>
+
+            <Button Name="btnDelete" Content="DELETE" Command="{Binding Path=DeleteWriterCommand}"></Button>
+
+            <Button Name="btnNavigateContentInterface" Content=">>NAVIGATE CONTENT INTERFACE" Command="{Binding NavigateContentInterfaceCommand}" Margin="15 0 0 0"></Button>
+
+            <Button Name="btnNavigateMain" Content=">>>NAVIGATE ADMIN PAGE" Command="{Binding NavigateMainCommand}" Margin="0 0 0 0"></Button>
+
+        </StackPanel>
+
+        <TextBlock Name="txtBlockMessage" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Message}"></TextBlock>
+
+
+        <ListView Name="lvWriters" Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Path=WritersList , Mode=TwoWay}"  SelectionMode="Single" SelectionChanged="lvWriters_SelectionChanged" >
+
+            <ListView.View>
+
+                <GridView>
+
+                    <GridViewColumn Header="Writer ID" DisplayMemberBinding="{Binding Writer_id}"></GridViewColumn>
+
+                    <GridViewColumn Header="Writer Name Surname" DisplayMemberBinding="{Binding Writer_name_surname}"></GridViewColumn>
+
+                </GridView>
+
+            </ListView.View>
+
+        </ListView>
+
+
+        <!--<DataGrid Name="dgWriterControl" AutoGenerateColumns="False" Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Path=WritersList , Mode=TwoWay}">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Writer ID" Width="auto" Binding="{Binding Path=Writer_id}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Writer Name Surname" Width="auto" Binding="{Binding Path=Writer_name_surname}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>-->
+
+    </Grid>
+</UserControl>

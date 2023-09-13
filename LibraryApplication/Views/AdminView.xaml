@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="LibraryApplication.Views.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryApplication.Views" xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Button Name="btnNvgtToReservation" Content="Reservation Procedures" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Command="{Binding NavigateReservationCommand}"></Button>
+
+            <Button Name="btnNvgtToClientOperations" Content="Client Procedures" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Command="{Binding NavigateClientCommand}"></Button>
+
+            <Button Name="btnNvgtToBookOperations" Content="Content Procedures" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Command="{Binding NavigateContentInterfaceCommand}"></Button>
+
+            <Button Name="btnNvgtToPenaltyOperations" Content="Penalty Procedures" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Command="{Binding NavigatePenaltyInterfaceCommand}"></Button>
+
+        </StackPanel>
+
+        <TextBlock Text="LMS Admin Interface" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontWeight="ExtraBold" FontSize="20"></TextBlock>
+
+        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="LOG OUT >>" Command="{Binding LogoutCommand}"></Button>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbLibraryModelStoreContainer" CdmEntityContainer="DbLibraryEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DbLibraryModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Book">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Book">
+        <MappingFragment StoreEntitySet="Tbl_Book">
+          <ScalarProperty Name="Id_Book" ColumnName="Id_Book" />
+          <ScalarProperty Name="Book_Name" ColumnName="Book_Name" />
+          <ScalarProperty Name="FK_Status_Id" ColumnName="FK_Status_Id" />
+          <ScalarProperty Name="FK_Writer_Id" ColumnName="FK_Writer_Id" />
+          <ScalarProperty Name="FK_Category_Id" ColumnName="FK_Category_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Category">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Category">
+        <MappingFragment StoreEntitySet="Tbl_Category">
+          <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_PenalPolicy">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_PenalPolicy">
+        <MappingFragment StoreEntitySet="Tbl_PenalPolicy">
+          <ScalarProperty Name="Id_PenalPolicy" ColumnName="Id_PenalPolicy" />
+          <ScalarProperty Name="Penalty_Days" ColumnName="Penalty_Days" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Penalty">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Penalty">
+        <MappingFragment StoreEntitySet="Tbl_Penalty">
+          <ScalarProperty Name="Id_Penalty" ColumnName="Id_Penalty" />
+          <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+          <ScalarProperty Name="FK_PenalPolicyID" ColumnName="FK_PenalPolicyID" />
+          <ScalarProperty Name="Penalty_Expires_On" ColumnName="Penalty_Expires_On" />
+          <ScalarProperty Name="FK_Punished_Reservation_id" ColumnName="FK_Punished_Reservation_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Reservation">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Reservation">
+        <MappingFragment StoreEntitySet="Tbl_Reservation">
+          <ScalarProperty Name="Id_Reservation" ColumnName="Id_Reservation" />
+          <ScalarProperty Name="FK_BookID" ColumnName="FK_BookID" />
+          <ScalarProperty Name="FK_Booked_to_UserID" ColumnName="FK_Booked_to_UserID" />
+          <ScalarProperty Name="Booking_Date" ColumnName="Booking_Date" />
+          <ScalarProperty Name="ExpectedToReturn_Date" ColumnName="ExpectedToReturn_Date" />
+          <ScalarProperty Name="FK_Reservation_Status_ID" ColumnName="FK_Reservation_Status_ID" />
+          <ScalarProperty Name="Return_date" ColumnName="Return_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Reservation_Status">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Reservation_Status">
+        <MappingFragment StoreEntitySet="Tbl_Reservation_Status">
+          <ScalarProperty Name="Id_Reservation_Status" ColumnName="Id_Reservation_Status" />
+          <ScalarProperty Name="Reservation_Status" ColumnName="Reservation_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Status">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Status">
+        <MappingFragment StoreEntitySet="Tbl_Status">
+          <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+          <ScalarProperty Name="Status_Name" ColumnName="Status_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_User">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_User">
+        <MappingFragment StoreEntitySet="Tbl_User">
+          <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+          <ScalarProperty Name="FK_UserTypeID" ColumnName="FK_UserTypeID" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="User_Surname" ColumnName="User_Surname" />
+          <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+          <ScalarProperty Name="User_UserNick" ColumnName="User_UserNick" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_UserType">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_UserType">
+        <MappingFragment StoreEntitySet="Tbl_UserType">
+          <ScalarProperty Name="Id_UserType" ColumnName="Id_UserType" />
+          <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Writer">
+      <EntityTypeMapping TypeName="DbLibraryModel.Tbl_Writer">
+        <MappingFragment StoreEntitySet="Tbl_Writer">
+          <ScalarProperty Name="Id_Writer" ColumnName="Id_Writer" />
+          <ScalarProperty Name="Writer_Name_Surname" ColumnName="Writer_Name_Surname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DbLibraryModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DbLibraryModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DbLibraryModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DbLibraryModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DbLibraryModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DbLibraryModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DbLibraryModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DbLibraryModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DbLibraryModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

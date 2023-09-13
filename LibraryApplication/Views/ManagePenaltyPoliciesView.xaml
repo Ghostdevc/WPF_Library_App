@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="LibraryApplication.Views.ManagePenaltyPoliciesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryApplication.Views" xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:PenaltyPoliciesViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid Margin="5" Grid.Column="0">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Penalty Policies Management" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+
+
+
+            <TextBlock Text="Penalty Policy Id : "
+                   Grid.Row="1"
+                   Grid.Column="0"/>
+
+            <TextBlock Text="Penalty Days : "
+                   Grid.Row="2"
+                   Grid.Column="0"/>
+
+
+            <TextBox Name="txtPenaltyPolicyId"
+                   Grid.Row="1"
+                   Grid.Column="1" Text="{Binding Path=CurrentPolicy.Penal_policy_id , Mode=TwoWay}" TextChanged="txtPenaltyPolicyId_TextChanged"/>
+
+            <TextBox Name="txtPenaltyPolicyDaysCount"
+                   Grid.Row="2"
+                   Grid.Column="1" Text="{Binding Path=CurrentPolicy.Penalty_days , Mode=TwoWay}" TextChanged="txtPenaltyPolicyDaysCount_TextChanged"/>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+
+                <Button Name="btnAdd" Content="ADD" Command="{Binding Path=SavePolicyCommand}"></Button>
+
+                <Button Name="btnSearch" Content="SEARCH" Command="{Binding Path=SearchPolicyCommand}"></Button>
+
+                <Button Name="btnUpdate" Content="UPDATE" Command="{Binding Path=UpdatePolicyCommand}"></Button>
+
+                <Button Name="btnDelete" Content="DELETE" Command="{Binding Path=DeletePolicyCommand}"></Button>
+
+                <Button Name="btnNavigatePenaltyInterface" Content=">>NAVIGATE PENALTY INTERFACE" Command="{Binding NavigatePenaltyInterfaceCommand}" Margin="15 0 0 0"></Button>
+
+                <Button Name="btnNavigateMain" Content=">>>NAVIGATE ADMIN PAGE" Command="{Binding NavigateMainCommand}" Margin="0 0 0 0"></Button>
+
+            </StackPanel>
+
+            <TextBlock Name="txtBlockMessage" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Message}"></TextBlock>
+
+
+            <ListView Name="lvPolicies" Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Path=PenaltyPolicies , Mode=TwoWay}"  SelectionMode="Single" SelectionChanged="lvPolicies_SelectionChanged" >
+
+                <ListView.View>
+
+                    <GridView>
+
+                        <GridViewColumn Header="Penalty Policy ID" DisplayMemberBinding="{Binding Path=Penal_policy_id}"></GridViewColumn>
+
+                        <GridViewColumn Header="Penalty Days Count" DisplayMemberBinding="{Binding Path=Penalty_days}"></GridViewColumn>
+
+                    </GridView>
+
+                </ListView.View>
+
+            </ListView>
+
+
+
+            <!--<DataGrid Name="dgPenaltyPolicy" AutoGenerateColumns="False" Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Path=PenaltyPolicies , Mode=TwoWay}" Background="#252A40" SelectionChanged="dgPenaltyPolicy_SelectionChanged" IsReadOnly="True">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Penalty Policy ID" Width="auto" Binding="{Binding Path=Penal_policy_id}"></DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Penalty Days Count" Width="auto" Binding="{Binding Path=Penalty_days}"></DataGridTextColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>-->
+
+        </Grid>
+
+    </Grid>
+</UserControl>
